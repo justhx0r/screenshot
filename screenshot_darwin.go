@@ -12,6 +12,7 @@ import (
 	"math"
 )
 
+//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
 func ScreenRect() (image.Rectangle, error) {
 	displayID := C.CGMainDisplayID()
 	width := int(C.CGDisplayPixelsWide(displayID))
@@ -19,6 +20,7 @@ func ScreenRect() (image.Rectangle, error) {
 	return image.Rect(0, 0, width, height), nil
 }
 
+//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
 func CaptureScreen() (*image.RGBA, error) {
 	rect, err := ScreenRect()
 	if err != nil {
@@ -27,6 +29,7 @@ func CaptureScreen() (*image.RGBA, error) {
 	return CaptureRect(rect)
 }
 
+//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
 func CaptureRect(rect image.Rectangle) (*image.RGBA, error) {
 	displayID := C.CGMainDisplayID()
 	width := int(math.Ceil(float64(C.CGDisplayPixelsWide(displayID))/16)*16)
