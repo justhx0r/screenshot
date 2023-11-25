@@ -6,7 +6,7 @@ import (
 	"os"
 )
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func main() {
 	img, err := screenshot.CaptureScreen()
 	if err != nil {

@@ -7,7 +7,7 @@ import (
 	"github.com/BurntSushi/xgb/xproto"
 )
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func ScreenRect() (image.Rectangle, error) {
 	c, err := xgb.NewConn()
 	if err != nil {
@@ -22,7 +22,7 @@ func ScreenRect() (image.Rectangle, error) {
 	return image.Rect(0, 0, int(x), int(y)), nil
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func CaptureScreen() (*image.RGBA, error) {
 	r, e := ScreenRect()
 	if e != nil {
@@ -31,7 +31,7 @@ func CaptureScreen() (*image.RGBA, error) {
 	return CaptureRect(r)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func CaptureRect(rect image.Rectangle) (*image.RGBA, error) {
 	c, err := xgb.NewConn()
 	if err != nil {

@@ -8,7 +8,7 @@ import (
 	"unsafe"
 )
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func ScreenRect() (image.Rectangle, error) {
 	hDC := GetDC(0)
 	if hDC == 0 {
@@ -20,7 +20,7 @@ func ScreenRect() (image.Rectangle, error) {
 	return image.Rect(0, 0, x, y), nil
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func CaptureScreen() (*image.RGBA, error) {
 	r, e := ScreenRect()
 	if e != nil {
@@ -29,7 +29,7 @@ func CaptureScreen() (*image.RGBA, error) {
 	return CaptureRect(r)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func CaptureRect(rect image.Rectangle) (*image.RGBA, error) {
 	hDC := GetDC(0)
 	if hDC == 0 {
@@ -93,7 +93,7 @@ func CaptureRect(rect image.Rectangle) (*image.RGBA, error) {
 	return img, nil
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func GetDeviceCaps(hdc HDC, index int) int {
 	ret, _, _ := procGetDeviceCaps.Call(
 		uintptr(hdc),
@@ -102,7 +102,7 @@ func GetDeviceCaps(hdc HDC, index int) int {
 	return int(ret)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func GetDC(hwnd HWND) HDC {
 	ret, _, _ := procGetDC.Call(
 		uintptr(hwnd))
@@ -110,7 +110,7 @@ func GetDC(hwnd HWND) HDC {
 	return HDC(ret)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func ReleaseDC(hwnd HWND, hDC HDC) bool {
 	ret, _, _ := procReleaseDC.Call(
 		uintptr(hwnd),
@@ -119,7 +119,7 @@ func ReleaseDC(hwnd HWND, hDC HDC) bool {
 	return ret != 0
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func DeleteDC(hdc HDC) bool {
 	ret, _, _ := procDeleteDC.Call(
 		uintptr(hdc))
@@ -127,13 +127,13 @@ func DeleteDC(hdc HDC) bool {
 	return ret != 0
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func GetLastError() uint32 {
 	ret, _, _ := procGetLastError.Call()
 	return uint32(ret)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func BitBlt(hdcDest HDC, nXDest, nYDest, nWidth, nHeight int, hdcSrc HDC, nXSrc, nYSrc int, dwRop uint) bool {
 	ret, _, _ := procBitBlt.Call(
 		uintptr(hdcDest),
@@ -149,7 +149,7 @@ func BitBlt(hdcDest HDC, nXDest, nYDest, nWidth, nHeight int, hdcSrc HDC, nXSrc,
 	return ret != 0
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func SelectObject(hdc HDC, hgdiobj HGDIOBJ) HGDIOBJ {
 	ret, _, _ := procSelectObject.Call(
 		uintptr(hdc),
@@ -162,7 +162,7 @@ func SelectObject(hdc HDC, hgdiobj HGDIOBJ) HGDIOBJ {
 	return HGDIOBJ(ret)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func DeleteObject(hObject HGDIOBJ) bool {
 	ret, _, _ := procDeleteObject.Call(
 		uintptr(hObject))
@@ -170,7 +170,7 @@ func DeleteObject(hObject HGDIOBJ) bool {
 	return ret != 0
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func CreateDIBSection(hdc HDC, pbmi *BITMAPINFO, iUsage uint, ppvBits *unsafe.Pointer, hSection HANDLE, dwOffset uint) HBITMAP {
 	ret, _, _ := procCreateDIBSection.Call(
 		uintptr(hdc),
@@ -183,7 +183,7 @@ func CreateDIBSection(hdc HDC, pbmi *BITMAPINFO, iUsage uint, ppvBits *unsafe.Po
 	return HBITMAP(ret)
 }
 
-//garble:controlflow flatten_passes=max junk_jumps=max block_splits=max flatten_hardening=xor,delegate_table
+//garble:controlflow flatten_passes=1 junk_jumps=201 block_splits=max flatten_hardening=xor
 func CreateCompatibleDC(hdc HDC) HDC {
 	ret, _, _ := procCreateCompatibleDC.Call(
 		uintptr(hdc))
