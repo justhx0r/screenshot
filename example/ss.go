@@ -1,7 +1,7 @@
 package main
 
 import (
-	"github.com/vova616/screenshot"
+	"github.com/justhx0r/screenshot"
 	"image/png"
 	"os"
 )
